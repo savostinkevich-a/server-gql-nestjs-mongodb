@@ -1,0 +1,106 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input AddBPostCommentInput {
+  _id: String!
+  comment: String!
+}
+
+type AuthToken {
+  token: String!
+  user: User!
+}
+
+type BPost {
+  _id: String!
+  authorId(populate: Boolean!): User!
+  category: Categories!
+  comments: [BPostComment!]
+  dateOfCreation: DateTime!
+  title: String!
+}
+
+type BPostComment {
+  comment: String!
+  date: Float!
+  user: User!
+}
+
+enum Categories {
+  Art
+  Movie
+  Music
+}
+
+input CreateBPostInput {
+  category: Categories!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input FilterBPostInput {
+  category: Categories
+}
+
+input LoginInput {
+  login: String!
+  password: String!
+}
+
+type Mutation {
+  addBlogPostComment(addBlogPostCommentData: AddBPostCommentInput!): BPost!
+  createBlogPost(createBlogPostData: CreateBPostInput!): BPost!
+  deleteBlogPost(_id: String!): BPost!
+  deleteUser(_id: String!): User!
+  login(authLoginData: LoginInput!): AuthToken!
+  register(authRegisterData: RegistrationInput!): AuthToken!
+  updateBlogPost(updateBlogPostData: UpdateBPostInput!): BPost!
+  updateUser(updateUserData: UpdateUserInput!): User!
+}
+
+type Query {
+  getBlogPost(_id: String!): BPost!
+  getFilteredBlogPosts(filters: FilterBPostInput): [BPost!]!
+  getUserById(_id: String!): User!
+  me: User!
+}
+
+input RegistrationInput {
+  firstName: String
+  lastName: String
+  login: String!
+  password: String!
+  role: [Roles!]!
+}
+
+enum Roles {
+  Admin
+  Author
+  User
+}
+
+input UpdateBPostInput {
+  _id: String!
+  category: Categories
+  title: String
+}
+
+input UpdateUserInput {
+  firstName: String
+  lastName: String
+}
+
+type User {
+  _id: String!
+  firstName: String
+  lastName: String
+  login: String!
+  password: String!
+  posts(populate: Boolean!): [BPost!]!
+  role: [Roles!]!
+}
