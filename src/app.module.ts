@@ -9,7 +9,7 @@ import { UsersModule } from './users/users.module';
 import { BlogModule } from './blog/blog.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://andrey:rBi7099606@cluster0.0wcvh.mongodb.net/SiteDB?retryWrites=true&w=majority'),
+  imports: [MongooseModule.forRoot('<>'),
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
